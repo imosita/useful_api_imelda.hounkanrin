@@ -29,7 +29,14 @@ class AuthController extends Controller
         //     'access_token' => $token,
         //     'token_type'   => 'Bearer',
         // ]);
-        return response()->json($user, 201);
+        // return response()->json($user, 201);
+
+        return [
+            'id'         => $user->id,
+            'name'       => $user->name,
+            'email'      => $user->email,
+            'created_at' => $user->created_at,
+        ];
     }
 
     public function login(Request $request)

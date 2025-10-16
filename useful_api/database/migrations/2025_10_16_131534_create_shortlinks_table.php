@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('shortlinks', function (Blueprint $table) {
             $table->id();
-            $table->string('original_url');
-            $table->string('custom_code')->unique();
+            $table->foreignId('user_id')->nullable()->index();
+            // $table->foreignId('module_id')->nullable()->index();
+            $table->string('original_url')->nullable();
+            $table->string('custom_code')->nullable();
+            $table->string('code')->nullable()->unique();
+            $table->integer('clicks')->default(0);
             $table->timestamps();
         });
+
+  
     }
 
     /**
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shortlinks');
+        // Schema::dropIfExists('shortlinks');
     }
 };

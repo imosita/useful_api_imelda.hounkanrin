@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Api;
+
 use App\Http\Controllers\Controller;
 use App\Models\Module;
 use Illuminate\Support\Facades\Auth;
@@ -18,5 +19,25 @@ class ModuleController extends Controller
         $module = Module::findOrFail($id);
         auth()->user()->modules()->updateExistingPivot($id, ['active' => false]);
         return response()->json(['message' => 'Module deactivated']);
+    }
+    // public function index()
+    // {
+    //     $modules = Module::all(['id', 'name', 'description']);
+
+    //     // return response()->json($modules, 200);
+
+    //     return [
+    //         'id'         => $modules->id,
+    //         'name'       => $modules->name,
+    //         'description' =>$modules->description
+    //     ];
+    // }
+
+    
+    public function index()
+    {
+        $modules = Module::all(['id', 'name', 'description']);
+
+        return response()->json($modules, 200);
     }
 }
