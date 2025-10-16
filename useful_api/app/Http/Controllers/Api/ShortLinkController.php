@@ -30,12 +30,13 @@ class ShortLinkController extends Controller
             'original_url' => 'required|url',
             'custom_code'  => 'nullable|string|max:10|regex:/^[a-zA-Z0-9_\-]+$/|unique:short_links,code',
         ]);
-        $code = $request->custom_code ?? Str::random(6);   
+        $code = $request->custom_code ?? Str::random(6);
         $link = auth()->user()->shortLinks()->create([
             'original_url' => $request->original_url,
             'code'         => $code,
             'clicks'       => 0,
         ]);
+        $link->refresh();
 
         return response()->json([
             'id'           => $link->id,
