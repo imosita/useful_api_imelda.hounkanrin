@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Wallet;
+use Illuminate\Http\Request;
 
 class WalletController extends Controller
 {
@@ -13,7 +12,7 @@ class WalletController extends Controller
         $wallet = $request->user()->wallet;
         return response()->json([
             'user_id' => $wallet->user_id,
-            'balance' => $wallet->balance
+            'balance' => $wallet->balance,
         ]);
     }
 
@@ -22,6 +21,9 @@ class WalletController extends Controller
         $request->validate([
             'amount' => 'required|numeric|gt:0|max:10000'
         ]);
+        // if ($request->amount >10000) {
+        //     return response()->json(['error' => 'Accès refusé'], 400);
+        // }
 
         $wallet = $request->user()->wallet;
         $wallet->balance += $request->amount;
@@ -35,9 +37,29 @@ class WalletController extends Controller
         ], 201);
     }
 
+    // public function topUp(Request $request)
+    // {
+    //     $request->validate([
+    //         'amount' => 'required|numeric|gt:0|max:10000',
+    //     ]);
+
+    //     $wallet = $request->user()->wallet;
+
+    //     DB::transaction(function () use ($request, $wallet) {
+    //         $wallet->increment('balance', $request->amount);
+    //     });
+
+    //     return response()->json([
+    //         'user_id'      => $wallet->user_id,
+    //         'balance'      => $wallet->balance + $request->amount,
+    //         'topup_amount' => $request->amount,
+    //         'created_at'   => now()->toISOString(),
+    //     ], 201);
+    // }
+
     public function transactions(Request $request)
     {
         $transactions = $request->user()->sentTransactions()->with('receiver')->get();
         return response()->json($transactions);
     }
-}   
+}
