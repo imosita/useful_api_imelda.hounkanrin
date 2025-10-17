@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import UserLogin from '@/components/UserLogin.vue'
 import UserRegister from '@/components/UserRegister.vue'
+import Dashbord from '@/components/Dashbord.vue'
+import MainPage from '@/components/MainPage.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -28,6 +30,18 @@ const router = createRouter({
       name: 'register',
       component: UserRegister,
     },
+    {
+      path: '/dashbord',
+      name: 'dashbord',
+      component: Dashbord,
+    },
+
+    {
+      path: '/mainpage',
+      name: 'mainpage',
+      component: MainPage,
+    }
+
 
 
 

@@ -38,11 +38,22 @@
                                 </div>
                                 <div class="relative">
                                     <button type="submit" :disabled="loading"
-                                        class="bg-cyan-500  cursor-pointer text-white rounded-md px-2 py-1"> 
+                                        class="bg-cyan-500  cursor-pointer text-white rounded-md px-2 py-1">
                                         {{ loading ? 'Connexion...' : 'Login' }}
                                     </button>
                                 </div>
-                                    <div v-if="success" class="text-green-500">Connection successful!</div>
+                                <div v-if="success" class="text-green-500">Connection successful!
+
+                                </div>
+
+                                <div class="flex ">
+                                    <span>Not registered?</span>
+
+                                    <RouterLink to="/auth/login" class="no-underline hover:underline text-blue-400">
+                                        Register
+                                    </RouterLink>
+
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -55,7 +66,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth'
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const email = ref('')
 const password = ref('')
 const loading = ref(false)
@@ -65,7 +77,7 @@ const authStore = useAuthStore()
 const submit = async () => {
     loading.value = true
     success.value = false
-    await authStore.login(email.value, password.value)
+    await authStore.login(email.value, password.value, router)
     loading.value = false
     success.value = true
     setTimeout(() => success.value = false, 10000)

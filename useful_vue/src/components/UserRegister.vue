@@ -4,7 +4,7 @@
     <input v-model="email" type="email" placeholder="Email" class="w-full p-2 border" required />
     <input v-model="password" type="password" placeholder="Mot de passe" class="w-full p-2 border" required />
     <button type="submit" class="bg-green-500 text-white px-4 py-2">Register</button>
-  </form> -->
+    </form> -->
 
     <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
         <div class="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -53,6 +53,14 @@
                                     </button>
                                     <div v-if="success" class="text-green-500"> Account created successfully!
                                     </div>
+                                    <div class="flex ">
+                                        <span>Already have an account?</span>
+                                        
+                                        <RouterLink to="/auth/login" class="no-underline hover:underline text-blue-400">
+                                            login
+                                        </RouterLink>
+
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -66,6 +74,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth'
+import { RouterLink } from 'vue-router'
 
 const name = ref('')
 const email = ref('')
@@ -82,6 +91,6 @@ const submit = async () => {
     await authStore.register(name.value, email.value, password.value)
     loading.value = false
     success.value = true
-    setTimeout(() => success.value = false, 10000)
+    // setTimeout(() => success.value = false, 10000)
 }
 </script>

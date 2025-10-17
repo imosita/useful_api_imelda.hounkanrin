@@ -33,7 +33,7 @@ class ModuleController extends Controller
     //     ];
     // }
 
-    
+
     public function index()
     {
         $modules = Module::all(['id', 'name', 'description']);
@@ -41,3 +41,17 @@ class ModuleController extends Controller
         return response()->json($modules, 200);
     }
 }
+
+
+// public function index()
+// {
+//     $user = auth()->user();
+//     $modules = Module::all();
+//     return response()->json($modules->map(function ($module) use ($user) {
+//         return [
+//             'id' => $module->id,
+//             'name' => $module->name,
+//             'active' => $user->modules->contains($module) && $user->modules->find($module->id)->pivot->active
+//         ];
+//     }));
+// }   
