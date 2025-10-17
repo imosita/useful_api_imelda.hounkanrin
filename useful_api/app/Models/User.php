@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Models\Module;
 use App\Models\ShortLink;
+use App\Models\Wallet;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -76,4 +77,13 @@ class User extends Authenticatable
         return $this->hasMany(ShortLink::class);
     }
 
+    public function sentTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'sender_id');
+    }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class)->withDefault(['balance' => 0]);
+    }
 }

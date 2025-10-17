@@ -28,7 +28,7 @@ class ShortLinkController extends Controller
     {
         $request->validate([
             'original_url' => 'required|url',
-            'custom_code'  => 'nullable|string|max:10|regex:/^[a-zA-Z0-9_\-]+$/|unique:short_links,code',
+            'custom_code'  => 'nullable|string|max:10|regex:/^[a-zA-Z0-9_\-]+$/|unique:shortlinks,code',
         ]);
         $code = $request->custom_code ?? Str::random(6);
         $link = auth()->user()->shortLinks()->create([
@@ -51,7 +51,8 @@ class ShortLinkController extends Controller
     public function redirect($code)
     {
         $link = ShortLink::where('code', $code)->firstOrFail();
-        $link->incrementClicks();
+        // $link->incrementClicks();
+        $link->increment('clicks');
         return redirect($link->original_url, 302);
     }
 
@@ -64,6 +65,6 @@ class ShortLinkController extends Controller
         }
 
         $link->delete();
-        return response()->json(['message' => 'Lien supprimé']);
+        return response()->json(['message' => 'Link deleted successfully']);
     }
 }
