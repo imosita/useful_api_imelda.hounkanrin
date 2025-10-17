@@ -56,7 +56,7 @@
                                     <div class="flex ">
                                         <span>Already have an account?</span>
                                         
-                                        <RouterLink to="/auth/login" class="no-underline hover:underline text-blue-400">
+                                        <RouterLink to="/auth/login" class="underline hover:underline text-blue-400">
                                             login
                                         </RouterLink>
 

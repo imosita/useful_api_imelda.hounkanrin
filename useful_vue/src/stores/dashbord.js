@@ -5,6 +5,7 @@ export const useDashboardStore = defineStore('dashboard', {
     state: () => ({
         modules: []
     }),
+    persist:true,
     actions: {
         async loadModules() {
             try {

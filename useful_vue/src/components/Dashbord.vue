@@ -14,10 +14,16 @@ onMounted(async () => {
     <div>
         <div v-for="module in dashboardStore.modules" :key="module.id" class="flex justify-between p-2">
             <span class="text-lg text-gray-800 font-medium">{{ module.name }}</span>
-            <button @click="dashboardStore.toggleModule(module)" class="bg-cyan-500  cursor-pointer text-white rounded-md px-2 py-1">
+            <button @click="dashboardStore.toggleModule(module)"
+                class="bg-cyan-500  cursor-pointer text-white rounded-md px-2 py-1">
                 {{ module.active ? 'Désactiver' : 'Activer' }}
             </button>
         </div>
+
+
+        <RouterLink to="/mainpage" class="bg-cyan-500  cursor-pointer text-white rounded-md px-2 py-1">
+            MainPage
+        </RouterLink>
 
     </div>
 </template>

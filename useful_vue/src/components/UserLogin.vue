@@ -49,7 +49,7 @@
                                 <div class="flex ">
                                     <span>Not registered?</span>
 
-                                    <RouterLink to="/auth/login" class="no-underline hover:underline text-blue-400">
+                                    <RouterLink to="/auth/login" class="underline hover:underline text-blue-400">
                                         Register
                                     </RouterLink>
 
